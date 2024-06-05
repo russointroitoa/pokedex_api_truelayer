@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pokeapi.co/api/v2/pokemon-species/invalidpokemon
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - pokeapi.co
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Wed, 05 Jun 2024 06:12:29 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '9'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, max-age=432000, s-maxage=432000
+      Etag:
+      - W/"9-0gXL1ngzMqISxa6S1zx3F4wtLyg"
+      Function-Execution-Id:
+      - dxtsmzymulb0
+      X-Cloud-Trace-Context:
+      - 7cd0f69ecfdad84dd3f77d8e3b2af3cf
+      X-Powered-By:
+      - Express
+      X-Served-By:
+      - cache-mia-kmia1760088-MIA
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1717567884.080980,VS0,VE1385
+      Vary:
+      - Accept-Encoding, x-fh-requested-host, accept-encoding
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cf-Cache-Status:
+      - HIT
+      Age:
+      - '64'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=KKxGQ4v%2Bt0MIt4N0IpEB0VVplI50xGHJNqDz8Si6lJ0NznIdE%2Bez0WOw%2F98XkJnn9plhnlQMpWBYbBtXyaktHt6SJxlvBY8XcZ6j%2FA2CLjuiGaNT%2FFJtYSe1qlWaLEMoohin2lnSr5Ve"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 88ee02e12e785278-MXP
+    body:
+      encoding: UTF-8
+      string: Not Found
+  recorded_at: Wed, 05 Jun 2024 06:12:28 GMT
+recorded_with: VCR 6.2.0

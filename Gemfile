@@ -11,6 +11,8 @@ gem "sqlite3", "~> 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
+gem 'dry-monads', '1.6.0'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -40,6 +42,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem 'byebug'
   gem 'rspec-rails', '~> 6.1.0'
+end
+
+group :test do
+  gem "vcr"
+  gem 'webmock'
 end
 
 group :development do

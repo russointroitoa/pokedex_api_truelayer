@@ -17,9 +17,11 @@ class PokemonService
     #
     # @return [Success(Hash)/Failure] Return Pokemon information if the Pokemon exists, otherwise return Failure
     #
-    def info(name:)
+    def info(name:, translate_description: false)
       response = yield request(name:)
-      fetch_info(response:)
+      result = yield fetch_info(response:)
+      result = yield process_description(result:) if translate_description
+      Success(result)
     end
     
     private
@@ -40,7 +42,7 @@ class PokemonService
         in Net::HTTPNotFound
           Failure[:not_found, "Pokemon #{name} not found"]
         else
-          Failure(response.body)
+          Failure(JSON.parse(response.body))
         end
       rescue StandardError => e
         Failure(StandardError.new(e.message, error: e))
@@ -62,6 +64,21 @@ class PokemonService
         result[:description] = description.present? ? description.dig(:flavor_text) : ''
         result[:habitat] = result.dig(:habitat, :name)
         Success(result.except(:flavor_text_entries))
+      end
+
+      #
+      # Translate description according to the following rules:
+      # - if Pokemon habitat is 'cave' or Pokemon is legendary, then use 'yoda' translate
+      # - otherwise use 'shakespeare' translation
+      #
+      # @param [Hash] result Pokemon information
+      #
+      # @return [Success(Hash)/Failure] Pokemon information with translated description
+      #
+      def process_description(result:)
+        type = result.dig(:habitat) == 'cave' || result.dig(:is_legendary) ? :yoda : :shakespeare
+        result[:description] = yield TranslationService.call(text: result[:description], type: type)
+        Success(result)
       end
   end
 end

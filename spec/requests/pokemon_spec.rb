@@ -20,4 +20,24 @@ RSpec.describe PokemonController, type: :controller do
       end
     end
   end
+
+  describe "GET /translated" do
+    context 'when Pokemon exists' do
+      let(:pokemon_name) { 'mew' }
+
+      it 'returns success' do
+        get :translated, params: { name: pokemon_name }
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'when Pokemon doesn\'t exist' do
+      let(:pokemon_name) { 'invalidpokemon' }
+
+      it 'return NotFound error' do
+        get :translated, params: { name: pokemon_name }
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
 end

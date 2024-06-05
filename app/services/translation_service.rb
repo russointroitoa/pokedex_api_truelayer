@@ -24,6 +24,13 @@ class TranslationService
     end
 
     private
+      #
+      # Check if the type of translation is permitted
+      #
+      # @param [Symbol] type Type of translation: available values [:yoda, :shakespeare]
+      #
+      # @return [Success/Failure] Return Success if the type is available, Failure
+      #
       def check_type(type:)
         if !AVAILABLE_ENDPOINTS.include?(type)
           return Failure(ArgumentError.new("Translation type #{type} not available"))
@@ -31,6 +38,14 @@ class TranslationService
         Success(true)
       end
       
+      #
+      # Perform an HTTP request to funtranslation.com to translate a given text
+      #
+      # @param [String] text Text to be translated
+      # @param [Symbol] type Type of translation
+      #
+      # @return [Success(String)/Failure] Return the translated text
+      #
       def request(text:, type:)
         uri = URI([BASE_URL, type.to_s].join('/'))
         # Set HTTPS
@@ -54,6 +69,13 @@ class TranslationService
         Failure(StandardError.new(e.message, error: e))
       end
 
+      #
+      # Process the HTTP response by fetching only the relevant content
+      #
+      # @param [Hash] response HTTP Response
+      #
+      # @return [<Type>] <description>
+      #
       def parse_response(response)
         return Success(response.dig(:contents, :translated)) if response.dig(:success, :total).positive?
 

@@ -2,20 +2,20 @@ require 'rails_helper'
 
 RSpec.describe TranslationService do
   context '#call' do
-    let(:text) { "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments." }
+    let(:text) { "So rare that it\nis still said to\nbe a mirage by\fmany experts. Only\na few people have\nseen it worldwide." }
 
     context 'when valid request' do
 
-      it 'returns yoda translation' do
+      it 'returns Yoda translation' do
         type = :yoda
         result = described_class.call(text: text, type: type)
-        expect(result.success).to eq("Created by a scientist after years of horrific gene splicing and dna engineering experiments,  it was.")
+        expect(result.success).to eq("To be a mirage by many experts,  so rare that it is still said.Only a few people have seen it worldwide.")
       end
 
-      it 'return shakespeare translation' do
+      it 'return Shakespeare translation' do
         type = :shakespeare
         result = described_class.call(text: text, type: type)
-        expect(result.success).to eq("'t wast did create by a scientist after years of horrific gene splicing and dna engineering experiments.")
+        expect(result.success).to eq("So rare yond 't is still did doth sayeth to beest a mirage by many experts. Only a few people hath't seen 't worldwide.")
       end
     end
 

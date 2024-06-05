@@ -76,7 +76,7 @@ class PokemonService
       # @return [Success(Hash)/Failure] Pokemon information with translated description
       #
       def process_description(result:)
-        type = result.dig(:habitat) == 'cave' || result.dig(:is_legendary) ? :yoda : :shakespeare
+        type = (result.dig(:habitat) == 'cave' || result.dig(:is_legendary)) ? :yoda : :shakespeare
         result[:description] = yield TranslationService.call(text: result[:description], type: type)
         Success(result)
       end

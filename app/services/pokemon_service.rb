@@ -10,6 +10,13 @@ class PokemonService
   DESCRIPTION_LANG = 'en'
 
   class << self
+    #
+    # Extract general information about a Pokemon, given its name
+    #
+    # @param [String] name Pokemon name
+    #
+    # @return [Success(Hash)/Failure] Return Pokemon information if the Pokemon exists, otherwise return Failure
+    #
     def info(name:)
       response = yield request(name:)
       fetch_info(response:)
@@ -24,7 +31,7 @@ class PokemonService
       # @return [Success(Hash)/Failure] If requested Pokemon exists, return Success. Otherwise return Failure 
       #
       def request(name:)
-        uri = URI([BASE_URL, SPECIES_ENDPOINT, name].join('/'))
+        uri = URI([BASE_URL, SPECIES_ENDPOINT, name.downcase].join('/'))
         response = Net::HTTP.get_response(uri)
         case response
         in Net::HTTPSuccess
@@ -35,6 +42,8 @@ class PokemonService
         else
           Failure(response.body)
         end
+      rescue StandardError => e
+        Failure(StandardError.new(e.message, error: e))
       end
 
       #

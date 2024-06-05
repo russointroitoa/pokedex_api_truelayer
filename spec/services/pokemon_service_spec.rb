@@ -6,9 +6,8 @@ RSpec.describe PokemonService do
     let(:invalid_pokemon_name) { 'invalidpokemon'}
 
     it 'returns pokemon information' do
-      result = VCR.use_cassette('pokemon_request') do
-        described_class.info(name: pokemon_name).success
-      end
+      # Requests to external APIs are automatically handled
+      result = described_class.info(name: pokemon_name).success
       expect(result[:name]).to eq(pokemon_name)
       expect(result).to have_key(:description)
       expect(result).to have_key(:habitat)
@@ -16,9 +15,8 @@ RSpec.describe PokemonService do
     end
 
     it 'returns NotFound failure for invalid pokemon' do
-      result = VCR.use_cassette('invalid_pokemon') do
-        described_class.info(name: invalid_pokemon_name)
-      end
+      # Requests to external APIs are automatically handled
+      result = described_class.info(name: invalid_pokemon_name)
       expect(result.failure?).to be_truthy
       expect(result.failure.first).to eq(:not_found)
     end

@@ -74,5 +74,16 @@ RSpec.configure do |config|
   VCR.configure do |config|
     config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
     config.hook_into :webmock
+
+    # Specify VCR cassette based on the URI
+    config.around_http_request do |request|
+      if request.uri =~ /pokeapi.co\/api\/v2\/pokemon-species/
+        VCR.use_cassette('pokemon_requests', record: :none, &request)
+      end
+
+      if request.uri =~ /api.funtranslations.com\/translate/
+        VCR.use_cassette('funtranslation_requests', record: :none, &request)
+      end
+    end
   end
 end

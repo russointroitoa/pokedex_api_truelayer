@@ -45,8 +45,10 @@ class TranslationService
         case response
         in Net::HTTPSuccess
           Success(JSON.parse(response.body, symbolize_names: true))
+        in Net::HTTPTooManyRequests
+          Failure[:too_many_requests, JSON.parse(response.body)["error"]]
         else
-          Failure(response.body)
+          Failure(JSON.parse(response.body))
         end
       rescue StandardError => e
         Failure(StandardError.new(e.message, error: e))

@@ -6,9 +6,7 @@ RSpec.describe PokemonController, type: :controller do
       let(:pokemon_name) { 'mew' }
 
       it 'returns success' do
-        response = VCR.use_cassette('pokemon_request') do
-          get :show, params: { name: pokemon_name }
-        end
+        get :show, params: { name: pokemon_name }
         expect(response).to have_http_status(:success)
       end
     end
@@ -17,9 +15,7 @@ RSpec.describe PokemonController, type: :controller do
       let(:pokemon_name) { 'invalidpokemon' }
 
       it 'return NotFound error' do
-        response = VCR.use_cassette('invalid_pokemon') do
-          get :show, params: { name: pokemon_name }
-        end
+        get :show, params: { name: pokemon_name }
         expect(response).to have_http_status(:not_found)
       end
     end

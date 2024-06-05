@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.funtranslations.com/translate/yoda
+    body:
+      encoding: UTF-8
+      string: '{"text":"It was created by a scientist after years of horrific gene
+        splicing and DNA engineering experiments."}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.funtranslations.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.14.0 (Ubuntu)
+      Date:
+      - Wed, 05 Jun 2024 11:53:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '348'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept
+      X-Auth-Status:
+      - 'true'
+      X-Ratelimit-Limit:
+      - 10 per hour
+      X-Ratelimit-Remaining:
+      - '10'
+      Cache-Control:
+      - max-age={expires}, pre-check=86400, post-check=43200
+      Expires:
+      - '0'
+      X-Powered-By:
+      - Luracast Restler v3.0.0rc3
+      Content-Language:
+      - en
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "success": {
+                "total": 1
+            },
+            "contents": {
+                "translated": "Created by a scientist after years of horrific gene splicing and dna engineering experiments,  it was.",
+                "text": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
+                "translation": "yoda"
+            }
+        }
+  recorded_at: Wed, 05 Jun 2024 11:53:22 GMT
+- request:
+    method: post
+    uri: https://api.funtranslations.com/translate/shakespeare
+    body:
+      encoding: UTF-8
+      string: '{"text":"It was created by a scientist after years of horrific gene
+        splicing and DNA engineering experiments."}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.funtranslations.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.14.0 (Ubuntu)
+      Date:
+      - Wed, 05 Jun 2024 11:53:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '357'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - Accept
+      X-Auth-Status:
+      - 'true'
+      X-Ratelimit-Limit:
+      - 10 per hour
+      X-Ratelimit-Remaining:
+      - '9'
+      Cache-Control:
+      - max-age={expires}, pre-check=86400, post-check=43200
+      Expires:
+      - '0'
+      X-Powered-By:
+      - Luracast Restler v3.0.0rc3
+      Content-Language:
+      - en
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "success": {
+                "total": 1
+            },
+            "contents": {
+                "translated": "'t wast did create by a scientist after years of horrific gene splicing and dna engineering experiments.",
+                "text": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
+                "translation": "shakespeare"
+            }
+        }
+  recorded_at: Wed, 05 Jun 2024 11:53:24 GMT
+recorded_with: VCR 6.2.0

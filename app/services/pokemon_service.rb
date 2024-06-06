@@ -49,14 +49,14 @@ class PokemonService
       end
 
       #
-      # General info about a Pokemon: ID, name, is_legendary, habitat and description
+      # General info about a Pokemon: name, is_legendary, habitat and description
       #
       # @param [Hash] response Information about Pokemon species
       #
       # @return [Hash] General info about the requested Pokemon
       #
       def fetch_info(response:)
-        result = response.slice(:id, :name, :is_legendary, :habitat, :flavor_text_entries)
+        result = response.slice(:name, :is_legendary, :habitat, :flavor_text_entries)
         description = result
           .dig(:flavor_text_entries)
           .select { |d| d.dig(:language, :name) == DESCRIPTION_LANG }
@@ -70,6 +70,7 @@ class PokemonService
       # Translate description according to the following rules:
       # - if Pokemon habitat is 'cave' or Pokemon is legendary, then use 'yoda' translate
       # - otherwise use 'shakespeare' translation
+      # - In case of issues in translating the description, use the standard description
       #
       # @param [Hash] result Pokemon information
       #
@@ -77,7 +78,14 @@ class PokemonService
       #
       def process_description(result:)
         type = (result.dig(:habitat) == 'cave' || result.dig(:is_legendary)) ? :yoda : :shakespeare
-        result[:description] = yield TranslationService.call(text: result[:description], type: type)
+        translated_description =
+          case TranslationService.call(text: result[:description], type: type)
+          in Success(description)
+            description
+          in Failure
+            result[:description]
+          end
+        result[:description] = translated_description
         Success(result)
       end
   end

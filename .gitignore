@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore all environment files (except templates).
-/.env*
+# /.env* # NOTE! COMMENTED for the purpose of this project
 !/.env*.erb
 
 # Ignore all logfiles and tempfiles.
@@ -30,12 +30,9 @@
 !/tmp/storage/.keep
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
-
-/config/credentials/development.key
-
-/config/credentials/staging.key
-
-/config/credentials/test.key
-
-/config/credentials/production.key
+# NOTE! COMMENTED for the purpose of this project
+# /config/master.key
+# /config/credentials/development.key
+# /config/credentials/staging.key
+# /config/credentials/test.key
+# /config/credentials/production.key

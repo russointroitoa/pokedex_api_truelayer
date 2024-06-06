@@ -14,7 +14,7 @@ Check your **Ruby version**:
 ```
 ruby -v
 ```
-If Ruby is not installed, use (rbenv)[https://github.com/rbenv/rbenv] to manage multiple Ruby versions and install the required version by running:
+If Ruby is not installed, use [rbenv](https://github.com/rbenv/rbenv) to manage multiple Ruby versions and install the required version by running:
 ```
 rbenv install 3.2.0
 ```

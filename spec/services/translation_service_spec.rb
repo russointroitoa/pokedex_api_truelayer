@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# Note: Requests to external APIs are automatically handled by VCR and response is saved into spec/fixtures/vcr_cassettes. You can look at the configuration
+# settings in rails_helper.rb
+
 RSpec.describe TranslationService do
   context '#call' do
     let(:text) { "So rare that it\nis still said to\nbe a mirage by\fmany experts. Only\na few people have\nseen it worldwide." }
